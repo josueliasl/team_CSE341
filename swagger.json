@@ -5,11 +5,11 @@
     "description": "User Api",
     "version": "1.0.0"
   },
-  "host": "cse341final-x05r.onrender.com",
+  "host": "localhost:3002",
   "basePath": "/",
   "schemes": [
-    "https"
-    
+    "https",
+    "http"
   ],
   "paths": {
     "/": {
@@ -31,6 +31,9 @@
           "authors"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -45,12 +48,35 @@
           "authors"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "biography": {
+                  "example": "any"
+                },
+                "nationality": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -61,6 +87,9 @@
           "authors"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -92,17 +121,32 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "biography": {
+                  "example": "any"
+                },
+                "nationality": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -120,11 +164,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "204": {
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
@@ -138,6 +179,9 @@
           "books"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -152,12 +196,35 @@
           "books"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "isbn": {
+                  "example": "any"
+                },
+                "authorId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -168,6 +235,9 @@
           "books"
         ],
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -199,17 +269,32 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "isbn": {
+                  "example": "any"
+                },
+                "authorId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "No Content"
           },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -227,11 +312,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "204": {
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
