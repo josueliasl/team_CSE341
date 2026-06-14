@@ -20,7 +20,7 @@ passport.use(
         {
             clientID: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
-            callbackURL: "http://localhost:3002/auth/github/callback"
+            callbackURL: process.env.CALLBACK_URL
         },
         function(accessToken, refreshToken, profile, done) {
             console.log("✅ GitHub authentication successful!");

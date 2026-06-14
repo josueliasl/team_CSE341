@@ -6,7 +6,7 @@ const doc = {
         description: 'API for managing authors, books, libraries, and users',
         version: '1.0.0'
     },
-    host: 'localhost:3002',
+    host: 'team-cse341.onrender.com',
     schemes: ['http'],
     security: [],
     securityDefinitions: {}
