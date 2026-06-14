@@ -12,6 +12,7 @@ router.use('/authors', require('./authors'));
 router.use('/books', require('./books'));
 router.use('/users', require('./users'));
 router.use('/libraries', require('./libraries'));
+router.use('/auth', require('./auth'));
 
 
 module.exports = router;

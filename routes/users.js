@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const isAuthenticated = require("../middleware/authenticate");
 
 const usersController = require("../controllers/users");
 
@@ -7,7 +8,7 @@ router.get("/", usersController.getAllUsers);
 
 router.get("/:id", usersController.getUserById);
 
-router.post("/", usersController.createUser);
+router.post("/", isAuthenticated, usersController.createUser);
 /* #swagger.tags = ['Users']
    #swagger.description = 'Create a new user'
    #swagger.parameters.body = {
@@ -48,6 +49,6 @@ router.put("/:id", usersController.updateUser);
    }
 */
 
-router.delete("/:id", usersController.deleteUser);
+router.delete("/:id", isAuthenticated, usersController.deleteUser);
 
 module.exports = router;
