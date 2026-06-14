@@ -1,14 +1,10 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
-// GET ALL
 const getAllUsers = async (req, res) => {
-    //#swagger.tags=['users']
-
     try {
         const result = await mongodb
             .getDatabase()
-            .db()
             .collection('users')
             .find()
             .toArray();
@@ -21,10 +17,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-// GET SINGLE
 const getUserById = async (req, res) => {
-    //#swagger.tags=['users']
-
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'
@@ -36,7 +29,6 @@ const getUserById = async (req, res) => {
 
         const result = await mongodb
             .getDatabase()
-            .db()
             .collection('users')
             .findOne({ _id: userId });
 
@@ -54,10 +46,7 @@ const getUserById = async (req, res) => {
     }
 };
 
-// POST
 const createUser = async (req, res) => {
-    //#swagger.tags=['users']
-
     const {
         firstName,
         lastName,
@@ -68,7 +57,6 @@ const createUser = async (req, res) => {
         createdAt
     } = req.body;
 
-    // Validation
     if (!firstName || !lastName || !email || !role) {
         return res.status(400).json({
             message: 'First name, last name, email, and role are required'
@@ -102,7 +90,6 @@ const createUser = async (req, res) => {
     try {
         const response = await mongodb
             .getDatabase()
-            .db()
             .collection('users')
             .insertOne(user);
 
@@ -123,10 +110,7 @@ const createUser = async (req, res) => {
     }
 };
 
-// PUT
 const updateUser = async (req, res) => {
-    //#swagger.tags=['users']
-
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'
@@ -178,7 +162,6 @@ const updateUser = async (req, res) => {
     try {
         const response = await mongodb
             .getDatabase()
-            .db()
             .collection('users')
             .replaceOne({ _id: userId }, user);
 
@@ -196,10 +179,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-// DELETE
 const deleteUser = async (req, res) => {
-    //#swagger.tags=['users']
-
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'
@@ -211,7 +191,6 @@ const deleteUser = async (req, res) => {
 
         const response = await mongodb
             .getDatabase()
-            .db()
             .collection('users')
             .deleteOne({ _id: userId });
 
@@ -236,4 +215,3 @@ module.exports = {
     updateUser,
     deleteUser
 };
-

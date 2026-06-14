@@ -4,6 +4,12 @@ const isAuthenticated = require("../middleware/authenticate");
 
 const usersController = require("../controllers/users");
 
+// Debug middleware for users routes
+router.use((req, res, next) => {
+  console.log(`📌 Users route - ${req.method} ${req.path} - Auth: ${req.isAuthenticated?.()}`);
+  next();
+});
+
 router.get("/", usersController.getAllUsers);
 
 router.get("/:id", usersController.getUserById);
