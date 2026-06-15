@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-// DNS fix for Windows
+
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
