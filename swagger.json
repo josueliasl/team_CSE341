@@ -8,7 +8,7 @@
   "host": "team-cse341.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {},
   "paths": {

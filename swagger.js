@@ -7,7 +7,7 @@ const doc = {
         version: '1.0.0'
     },
     host: 'team-cse341.onrender.com',
-    schemes: ['http'],
+    schemes: ['https'],
     security: [],
     securityDefinitions: {}
 };

@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
@@ -8,51 +7,45 @@ const express = require('express');
 const app = express();
 const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
-const session = require("express-session");
-const passport = require("passport");
+const session = require('express-session');
+const passport = require('passport');
+const cors = require('cors');
 
 const port = process.env.PORT || 3002;
 
-// Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Session middleware - CRITICAL: Must be configured properly
+app.use(
+    cors({
+        origin: [
+            'http://localhost:3002',
+            'https://team-cse341.onrender.com'
+        ],
+        credentials: true
+    })
+);
+
 app.use(
     session({
         secret: process.env.SESSION_SECRET || 'mysecretkey',
         resave: false,
-        saveUninitialized: true,  // Set to true to ensure session is created
+        saveUninitialized: true,
         cookie: {
-            secure: false,  // false for HTTP, true for HTTPS
-            maxAge: 24 * 60 * 60 * 1000, // 24 hours
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000,
             httpOnly: true,
             sameSite: 'lax'
         },
-        name: 'sessionId'  // Custom session cookie name
+        name: 'sessionId'
     })
 );
 
-// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Load passport configuration
-require("./config/passport");
+require('./config/passport');
 
-// CORS middleware
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3002');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
-    );
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-});
-
-// Debug middleware to log authentication status
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
     console.log(`  - Session ID: ${req.sessionID}`);
@@ -61,16 +54,16 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routes
 app.use('/', require('./routes/index'));
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Global error handler:', err);
-    res.status(500).json({ message: 'Internal server error', error: err.message });
+    res.status(500).json({
+        message: 'Internal server error',
+        error: err.message
+    });
 });
 
-// Database initialization
 mongodb.initDb((err) => {
     if (err) {
         console.log('❌ Database initialization error:', err);
@@ -78,10 +71,6 @@ mongodb.initDb((err) => {
     } else {
         app.listen(port, () => {
             console.log(`✅ Server running on port ${port}`);
-            console.log(`📚 Swagger UI: http://localhost:${port}/api-docs`);
-            console.log(`🔐 GitHub Auth: http://localhost:${port}/auth/github`);
-            console.log(`🧪 Test auth: http://localhost:${port}/auth/test`);
-            console.log(`🔍 Auth status: http://localhost:${port}/auth/status`);
         });
     }
 });
