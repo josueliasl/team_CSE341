@@ -41,7 +41,7 @@ passport.use(
         }
     )
 );
-
+//j
 // Serialize user - put user ID into session
 passport.serializeUser((user, done) => {
     console.log("🔐 Serializing user:", user.id);
