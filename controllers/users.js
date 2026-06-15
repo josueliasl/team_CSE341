@@ -2,6 +2,8 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllUsers = async (req, res) => {
+    //#swagger.tags=['users']
+
     try {
         const result = await mongodb
             .getDatabase()
@@ -18,6 +20,8 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
+    //#swagger.tags=['users']
+
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'
@@ -47,6 +51,8 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+    //#swagger.tags=['users']
+
     const {
         firstName,
         lastName,
@@ -111,6 +117,8 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+    //#swagger.tags=['users']
+
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'
@@ -180,6 +188,8 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+    //#swagger.tags=['users']
+
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).json({
             message: 'Invalid user ID'

@@ -349,6 +349,9 @@
     },
     "/users/": {
       "get": {
+        "tags": [
+          "users"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -360,6 +363,9 @@
         }
       },
       "post": {
+        "tags": [
+          "users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -411,6 +417,9 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": [
+          "users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -436,6 +445,9 @@
         }
       },
       "put": {
+        "tags": [
+          "users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -491,6 +503,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "users"
+        ],
         "description": "",
         "parameters": [
           {
